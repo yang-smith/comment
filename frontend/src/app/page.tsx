@@ -73,7 +73,7 @@ ${comments}
         },
         body: JSON.stringify({
           message: prompt,
-          model: 'openai/gpt-4o' // 可以从UI中选择不同模型
+          model: 'google/gemini-2.0-flash-001' // 可以从UI中选择不同模型
         }),
       });
 
