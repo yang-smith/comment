@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评论说了啥？- 小红书评论分析</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>评论说了啥？</h1>
+            <p class="subtitle">复制小红书评论，一键解读精彩观点</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <h2>粘贴小红书评论</h2>
+                <textarea id="comments-input" placeholder="在这里粘贴小红书帖子下方的评论...&#10;&#10;比如：&#10;@用户1: 太好看了吧！想问博主用的什么口红色号？&#10;@用户2: 第三张真的绝了，请问拍照姿势怎么摆的呀？&#10;@用户3: 衣服链接求分享！"></textarea>
+                <div class="buttons">
+                    <button id="clear-btn">清空</button>
+                    <button id="analyze-btn">分析评论</button>
+                </div>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="loader"></div>
+                <p>AI正在思考中...</p>
+            </div>
+
+            <div class="results-section" id="results">
+                <div class="result-box" id="summary-box">
+                    <h2>一句话总结 <i class="fas fa-lightbulb"></i></h2>
+                    <div class="result-content" id="summary-content">
+                        <!-- AI生成的一句话总结将显示在这里 -->
+                    </div>
+                    <button class="share-btn" id="share-summary">
+                        <i class="fas fa-share-alt"></i> 分享总结
+                    </button>
+                </div>
+
+                <div class="result-box" id="representatives-box">
+                    <h2>评论人民代表制 <i class="fas fa-users"></i></h2>
+                    <div class="result-content" id="representatives-content">
+                        <!-- AI生成的人民代表将显示在这里 -->
+                    </div>
+                    <button class="share-btn" id="share-representatives">
+                        <i class="fas fa-share-alt"></i> 分享代表
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2023 评论说了啥？- 让评论阅读更有趣</p>
+        </footer>
+
+        <!-- 分享弹窗 -->
+        <div id="share-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>分享你的发现</h2>
+                <div id="share-content"></div>
+                <div class="share-options">
+                    <button class="share-option" id="copy-link">
+                        <i class="fas fa-copy"></i> 复制链接
+                    </button>
+                    <button class="share-option" id="share-wechat">
+                        <i class="fab fa-weixin"></i> 微信
+                    </button>
+                    <button class="share-option" id="share-weibo">
+                        <i class="fab fa-weibo"></i> 微博
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

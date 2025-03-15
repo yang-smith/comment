@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分享 - 评论说了啥？</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .share-page {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .share-content {
+            margin: 30px auto;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        
+        .app-promo {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff2442;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="share-page">
+            <h1>评论说了啥？</h1>
+            <p class="subtitle">评论内容智能解读</p>
+            
+            <div class="share-content">
+                <h2 id="share-title">【评论说了啥】</h2>
+                <div id="shared-content">
+                    <!-- 分享内容将通过URL参数动态插入 -->
+                    <p>这是一个默认的分享内容，通常这里会显示用户分享的评论分析结果。</p>
+                </div>
+            </div>
+            
+            <div class="app-promo">
+                <h3>喜欢这个内容？</h3>
+                <p>试试"评论说了啥？"，一键解读小红书评论精彩观点！</p>
+                <a href="index.html" class="back-btn">立即体验</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 这里可以添加读取URL参数并显示分享内容的逻辑
+        // 实际产品中这部分会与后端结合
+        document.addEventListener('DOMContentLoaded', function() {
+            // 实际应用中会通过URL参数获取分享内容
+            // 这里仅作演示
+            const demoContent = `
+                <div class="representative-card">
+                    <h3>👩‍🎨 颜值鉴赏家 王美丽</h3>
+                    <p>博主这颜值真的绝了！这是我看过的小红书最高颜值top3，不接受反驳！想请问一下用的什么粉底液呀？</p>
+                </div>
+                <div class="representative-card">
+                    <h3>👔 穿搭研究员 张时尚</h3>
+                    <p>这身搭配也太绝了吧！求博主分享一下上衣的链接，已经被种草了，钱包准备好了！</p>
+                </div>
+                <div class="representative-card">
+                    <h3>🧐 理性评价师 李客观</h3>
+                    <p>确实很好看，但我觉得如果第三张角度再调整一下会更好。不过还是给博主点赞，期待更多美照！</p>
+                </div>
+            `;
+            
+            document.getElementById('shared-content').innerHTML = demoContent;
+            document.getElementById('share-title').textContent = "【评论说了啥】评论人民代表制";
+        });
+    </script>
+</body>
+</html> 
