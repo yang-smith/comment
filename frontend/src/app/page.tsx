@@ -50,7 +50,7 @@ export default function CommentAnalyzer() {
   "representatives": [
     {
       "id": 1,
-      "name": "代表类型名称",
+      "name": "代表类型名称（取个贴切有趣的名字）",
       "avatar": "代表类型的表情符号",
       "opinion": "该类型的代表性观点",
       "percentage": 35
