@@ -22,8 +22,7 @@ export async function POST(request: NextRequest) {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
-        'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-        'X-Title': '评论了个啥？',
+        'X-Title': 'Comment Analysis',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
