@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { message, model = 'openai/gpt-4o' } = body;
+    const { message, model = 'google/gemini-2.0-flash-001' } = body;
     
     // 获取 OpenRouter API 密钥
     const apiKey = process.env.OPENROUTER_API_KEY;
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 调用 OpenRouter API
+    // 调用 OpenRouter API (非流式)
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -31,7 +31,6 @@ export async function POST(request: NextRequest) {
             content: message,
           },
         ],
-        stream: true,
       }),
     });
 
@@ -44,8 +43,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 直接返回流式响应
-    return new NextResponse(response.body);
+    // 解析 JSON 响应
+    const data = await response.json();
+    
+    // 返回 JSON 响应
+    return NextResponse.json(data);
     
   } catch (error) {
     console.error('API代理错误:', error);

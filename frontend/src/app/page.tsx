@@ -14,13 +14,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
 
 export default function CommentAnalyzer() {
   const [comments, setComments] = useState("")
   const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [streamingResponse, setStreamingResponse] = useState("")
   const [parsedResults, setParsedResults] = useState<{
     summary: string
     representatives: Array<{
@@ -41,7 +39,6 @@ export default function CommentAnalyzer() {
     if (!comments.trim()) return
 
     setIsAnalyzing(true)
-    setStreamingResponse("")
     setParsedResults(null)
 
     try {
@@ -84,50 +81,13 @@ ${comments}
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // 处理OpenRouter的流式响应
-      const reader = response.body?.getReader();
-      if (!reader) throw new Error('无法获取响应流');
-
-      const decoder = new TextDecoder();
-      let done = false;
-      let accumulatedText = "";
-
-      while (!done) {
-        const { value, done: doneReading } = await reader.read();
-        done = doneReading;
-        
-        if (value) {
-          const chunk = decoder.decode(value);
-          
-          // 处理SSE格式的响应（data: 开头的行）
-          const lines = chunk.split('\n').filter(line => line.trim() !== '');
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              const data = line.substring(6);
-              
-              // 特殊情况：结束标记
-              if (data === '[DONE]') continue;
-              
-              try {
-                const parsed = JSON.parse(data);
-                // 提取文本内容
-                const content = parsed.choices?.[0]?.delta?.content || '';
-                if (content) {
-                  accumulatedText += content;
-                  setStreamingResponse(accumulatedText);
-                }
-              } catch (e) {
-                console.error('解析流数据出错:', e);
-              }
-            }
-          }
-        }
-      }
-
       // 解析JSON响应
+      const data = await response.json();
+      const content = data.choices[0].message.content;
+      
       try {
         // 从响应中提取JSON部分
-        const jsonMatch = accumulatedText.match(/\{[\s\S]*\}/);
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
         if (!jsonMatch) throw new Error('无法从响应中解析JSON');
         
         const jsonData = JSON.parse(jsonMatch[0]);
