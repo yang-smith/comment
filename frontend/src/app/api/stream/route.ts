@@ -6,7 +6,7 @@ export const runtime = 'edge';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { message, model = 'google/gemini-2.0-flash-001' } = body;
+    const { message, model = 'perplexity/r1-1776' } = body;
     
     // 获取 OpenRouter API 密钥
     const apiKey = process.env.OPENROUTER_API_KEY;

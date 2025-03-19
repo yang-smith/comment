@@ -44,13 +44,14 @@ export default function CommentAnalyzer() {
     try {
       // 构建提示词，告诉AI我们期望的输出格式
       const prompt = `
+      你的性格幽默，善于化用网络梗，常年上网。
 分析以下评论内容，提取关键信息，按以下JSON格式返回：
 {
   "summary": "一句话总结评论的整体情况",
   "representatives": [
     {
       "id": 1,
-      "name": "代表类型名称（取个贴切有趣的名字）",
+      "name": "代表类型名称（取个贴切幽默的名字）",
       "avatar": "代表类型的表情符号",
       "opinion": "该类型的代表性观点",
       "percentage": 35
@@ -73,7 +74,7 @@ ${comments}
         },
         body: JSON.stringify({
           message: prompt,
-          model: 'google/gemini-2.0-flash-001' // 可以从UI中选择不同模型
+          model: 'perplexity/r1-1776' // 可以从UI中选择不同模型
         }),
       });
 
